@@ -17,16 +17,19 @@ public class ProduitController {
     private final IServiceProduit produitService;
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<List<Produit>> getAllProduits() {
         return ResponseEntity.ok(produitService.getAllProduits());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Produit> getProduitById(@PathVariable Long id) {
         return ResponseEntity.ok(produitService.getProduitById(id));
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Produit> createProduit(@RequestBody Produit produit) {
         return ResponseEntity.ok(produitService.saveProduit(produit));
     }
